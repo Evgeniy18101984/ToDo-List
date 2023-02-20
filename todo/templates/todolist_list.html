@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="not-active" method="get">
+        <input type="submit" value="Незавершенные задания">
+    </form>
+        <ul>
+
+            {% for todolist in todolist_ %}
+            <h4>
+                <input value="{{ todolist.tasks }}  (Выполнить:  {{ todolist.estimated_and_time_of_completion | date:"H:i d-m-Y" }}) - Статус выполнения:  {{ todolist.status }}" type="button" onclick="location.href='{% url "detail" todolist.id %}'">
+            </h4>
+            {% empty %}
+            <p>There are no to-do items in this list.</p>
+            {% endfor %}
+        </ul>
+
+    <form action="create" method="get">
+        <input type="submit" value="Добавить задание">
+    </form>
+
+{% endblock content %}
